@@ -42,7 +42,6 @@ public class Main {
             }
             primeiravez = false;
             MenuPrincipal menuPrincipal = MenuPrincipal.pegarUsuario();
-            System.out.println("Option user: " + menuPrincipal);
             switch(menuPrincipal) {
                 case JOGAR:
                     Jogar jogar = new Jogar();

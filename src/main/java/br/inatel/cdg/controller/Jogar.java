@@ -15,13 +15,13 @@ public class Jogar {
         long tempoInicial;
         long tempoFinal;
         long tempoGasto;
-        int passos = 0;
+
         String passoanterior;
         Ranking ranking = new Ranking();
         jogadorDAO jogadorBD = new jogadorDAO();
         String jogarnovamente;
 
-        sc.nextLine();
+
         passoanterior = "x";
 
         Jogador j1 = new Jogador();
@@ -41,19 +41,18 @@ public class Jogar {
             System.out.println(" VAI VAI VAI! ");
             // COMEÇA O JOGO
             tempoInicial = System.currentTimeMillis();
-            passoatual = sc.nextLine();
 
-            while (passos < 10) {
+
+
+            for(int passos =0;passos<10; passos++) {
                 passoatual = sc.nextLine();
-                if (!passoatual.equals(passoanterior)) {
-                    passos++;
+                if(!passoatual.equals(passoanterior)) {
                     System.out.println("PASSOS DADOS " + passos);
-
-                } else if (passoatual.equals(passoanterior)) {
-                    System.out.println("Ops, quase tropecou"); //Substituir por "Ops, quase tropeceu" ou "perdeu o pé".
-                    System.out.println("LEMBRE-SE SEMPRE DE USAR O OUTRO PÉ");
+                    passoanterior = passoatual;
+                    continue;
                 }
-                passoanterior = passoatual;
+                System.out.println("Ops, quase tropecou");
+                System.out.println("LEMBRE-SE SEMPRE DE USAR O OUTRO PÉ");
             }
             System.out.println("FIM DA CORRIDA! ESTAMOS CALCULANDO SEU TEMPO...");
             TimeUnit.SECONDS.sleep(4);
