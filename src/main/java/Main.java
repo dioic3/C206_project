@@ -4,7 +4,6 @@ import br.inatel.cdg.controller.Jogar;
 import br.inatel.cdg.models.Jogador;
 import br.inatel.cdg.models.MenuPrincipal;
 import br.inatel.cdg.models.Ranking;
-import excessoes.Excesaum;
 import br.inatel.cdg.Conections.jogadorDAO;
 
 import java.util.Scanner;
