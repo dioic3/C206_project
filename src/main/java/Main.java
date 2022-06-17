@@ -1,6 +1,7 @@
 import br.inatel.cdg.Comojogar;
 import br.inatel.cdg.Entrada;
 import br.inatel.cdg.models.Jogador;
+import br.inatel.cdg.models.MenuPrincipal;
 import br.inatel.cdg.models.Ranking;
 import excessoes.Excesaum;
 import br.inatel.cdg.Conections.jogadorDAO;
@@ -39,30 +40,13 @@ public class Main {
                 System.out.println("BEM VINDO");
             }
             primeiravez = false;
-            System.out.println("SELECIONE A OPÇAO DESEJADA: ");
-            System.out.println("1- JOGAR");
-            System.out.println("2- COMO JOGAR");
-            System.out.println("3- RANKING DOS MELHORES");
-            System.out.println("4- SAIR");
-            System.out.println("Sua opçao: ");
-            //entrada da opção desejada
-            int opçaodesejada = 0;
-            do {
-                try {
-                    opçaodesejada = entrada.Menu();
+            MenuPrincipal menuPrincipal = MenuPrincipal.pegarUsuario();
 
-                } catch (Excesaum e) {
-                    System.out.println(e.getMessage());
-                }
-
-            } while (opçaodesejada != 1 && opçaodesejada != 2 && opçaodesejada != 3 && opçaodesejada != 4);
-
-            switch (opçaodesejada) {
-                case 1:
+            switch(menuPrincipal) {
+                case JOGAR:
                     sc.nextLine();
                     int passos = 0;
                     passoanterior = "x";
-
 
                     Jogador j1 = new Jogador();
                     System.out.println("Digite seu nick: ");
@@ -112,17 +96,8 @@ public class Main {
                     }
                     System.out.println("JOGAR NOVAMENTE? SIM//NAO ");
                     jogarnovamente = sc.nextLine();
-                    if (jogarnovamente.equals("SIM") || jogarnovamente.equals("sim")) {
-                        opçaodesejada = 1;
-                    } else if (jogarnovamente.equals("NAO") || jogarnovamente.equals("nao")) {
-                        flag = false;
-                    } else if (!jogarnovamente.equals("SIM") && !jogarnovamente.equals("NAO") && !jogarnovamente.equals("sim") && !jogarnovamente.equals("nao")) {
-                        System.out.println("DIGITE SIM OU NAO");
-                        jogarnovamente = sc.nextLine();
-                    }
-
                     break;
-                case 2:
+                case COMO_JOGAR:
                     Comojogar.Comojogartexto();
                     try {
                         TimeUnit.SECONDS.sleep(22);
@@ -131,11 +106,11 @@ public class Main {
                         e.printStackTrace();
                     }
                     break;
-                case 3:
+                case MOSTRAR_RANKING:
                     System.out.println("ranking dos melhores vai ser mostrada");
                     ranking.mostrarRank();
                     break;
-                case 4:
+                case SAIR:
                     System.out.println("TCHAU TCHAU");
                     flag = false;
                     break;
