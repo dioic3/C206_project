@@ -15,6 +15,7 @@ Quando for inserido os 10 passos, sendo um passo de cada. Vai dar como se ele ti
 Foi feito um ranking para mostrar a quantidade de pessoas que jogou e o tempo total.
 
 O menu do jogo é algo bem simples.
+
 **1**. Jogar
 **2**. Como jogar
 **3**. Mostrar Ranking
