@@ -1,6 +1,8 @@
 package br.inatel.cdg.models;
 
+
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -24,20 +26,29 @@ public enum MenuPrincipal {
     public int getId(){
         return id;
     }
-    public static MenuPrincipal pegarUsuario(){
+    public static MenuPrincipal pegarUsuario() {
         Scanner input = new Scanner(System.in);
-        while(true){
+        while (true) {
             System.out.println("Seja bem-vindo ao MARATRON 3000!");
             System.out.println("___________________________");
             MenuPrincipal.imprimirOpcoes();
             System.out.println("___________________________");
             System.out.println("Insira sua opção:");
-            int id = input.nextInt();
+            int id;
+            try {
+                id = input.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("--------------------------------------------");
+                System.out.println("Digite as opções válidas no menu, por favor.");
+                System.out.println("--------------------------------------------");
+                break;
+            }
             MenuPrincipal menuPrincipal = MenuPrincipal.pegarOpcao(id);
-            if(menuPrincipal != null)
+            if (menuPrincipal != null)
                 return menuPrincipal;
             System.out.println("Erro! Opção inválida.");
         }
+        return pegarUsuario();
     }
 
     public static void imprimirOpcoes(){
