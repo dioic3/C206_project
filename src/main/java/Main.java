@@ -1,4 +1,5 @@
 import br.inatel.cdg.Comojogar;
+import br.inatel.cdg.Conections.rankingDAO;
 import br.inatel.cdg.Entrada;
 import br.inatel.cdg.controller.Jogar;
 import br.inatel.cdg.models.Jogador;
@@ -12,12 +13,10 @@ import java.util.concurrent.TimeUnit;
 public class Main {
 
     public static void main(String[] args) {
-        Ranking ranking = new Ranking(); // criar funçao para ler BD
+        rankingDAO rankingBD = new rankingDAO();
+         // criar funçao para ler BD
         jogadorDAO jogadorBD = new jogadorDAO();
 
-        ranking.addJogador(new Jogador("Jorge", 123123));
-        ranking.addJogador(new Jogador("Pedro", 1000));
-        ranking.addJogador(new Jogador("Joao", 12000));
 
         Scanner sc = new Scanner(System.in);
         Entrada entrada = new Entrada();
@@ -39,7 +38,7 @@ public class Main {
         boolean primeiravez = true;
 
         while (flag) {
-
+            Ranking ranking = rankingBD.recuperaRankOrdenado();
             if (primeiravez) {
                 System.out.println("BEM VINDO");
             }
@@ -60,8 +59,10 @@ public class Main {
                     }
                     break;
                 case MOSTRAR_RANKING:
-                    System.out.println("ranking dos melhores vai ser mostrada");
+                    System.out.println("___________________________");
                     ranking.mostrarRank();
+                    System.out.println("___________________________");
+                    sc.nextLine();
                     break;
                 case SAIR:
                     System.out.println("TCHAU TCHAU");

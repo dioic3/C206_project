@@ -1,9 +1,7 @@
 package br.inatel.cdg.controller;
 
 import br.inatel.cdg.Conections.jogadorDAO;
-import br.inatel.cdg.models.Jogador;
-import br.inatel.cdg.models.Move;
-import br.inatel.cdg.models.Ranking;
+import br.inatel.cdg.models.*;
 import br.inatel.cdg.Conections.rankingDAO;
 
 import java.util.Scanner;
@@ -20,10 +18,7 @@ public class Jogar {
 
         String passoanterior;
         rankingDAO rankingBD = new rankingDAO();
-        Ranking ranking = new Ranking();
-        ranking.addJogador(new Jogador("Jorge", 123123));
-        ranking.addJogador(new Jogador("Pedro", 1000));
-        ranking.addJogador(new Jogador("Joao", 12000));
+        Ranking ranking = rankingBD.recuperaRankOrdenado();
 
         jogadorDAO jogadorBD = new jogadorDAO();
         String jogarnovamente;
@@ -74,10 +69,13 @@ public class Jogar {
             tempoFinal = System.currentTimeMillis();
             tempoGasto = tempoFinal - tempoInicial;
             System.out.println("Seu tempo foi: " + tempoGasto + "ms.");
-            j1.setTempogasto(tempoGasto);
-            ranking.addJogador(j1);
-            System.out.println("Sua posiçao no ranking é: " + ranking.VerPosicao(j1));// implementaar retorno do rank
-            rankingBD.inserirRanking(j1);
+            Rank rank = new Rank();
+            rank.setTempo(tempoGasto);
+            rank.setJogador(j1);
+            RankingJogadorDTO jogadorDTO = new RankingJogadorDTO(rank,j1);
+            ranking.addJogador(jogadorDTO);
+            System.out.println("Sua posiçao no ranking é: " + ranking.VerPosicao(jogadorDTO));// implementaar retorno do rank
+            rankingBD.inserirRanking(jogadorDTO);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

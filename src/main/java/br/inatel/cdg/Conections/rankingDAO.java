@@ -2,22 +2,29 @@ package br.inatel.cdg.Conections;
 
 import br.inatel.cdg.models.Jogador;
 import br.inatel.cdg.models.Rank;
+import br.inatel.cdg.models.Ranking;
+import br.inatel.cdg.models.RankingJogadorDTO;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class rankingDAO extends connectionDAO{
     boolean sucesso = false;
 
-    public boolean inserirRanking(Jogador jogador) {
+    public boolean inserirRanking(RankingJogadorDTO jogadorDTO) {
         connectToDB();
         String sql = "INSERT INTO ranking (idjogador, tempo) values(?,?)";
 
         try {
-            pst = con.prepareStatement(sql);
-            pst.setInt(1, jogador.getId());
-            pst.setLong(2, jogador.getTempogasto());
+            pst = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pst.setInt(1, jogadorDTO.getJogador().getId());
+            pst.setLong(2, jogadorDTO.getRank().getTempo());
             pst.execute();
+            ResultSet rs = pst.getGeneratedKeys();
+            rs.next();
             sucesso = true;
+            jogadorDTO.getRank().setId(rs.getInt(1)); //jogador retorna com o ID
         } catch(SQLException exc) {
             System.out.println("Erro: " + exc.getMessage());
             sucesso = false;
@@ -56,14 +63,25 @@ public class rankingDAO extends connectionDAO{
         }
         return sucesso;
     }
-    public boolean deletarJogador(int id) {
-        connectToDB();
-        String sql = "DELETE FROM jogador where id=?";
 
+    public Ranking recuperaRankOrdenado(){
+        connectToDB();
+        String sql = "SELECT r.tempo,r.id,j.id,j.nick FROM jogador j INNER JOIN Ranking r ON j.id = r.idjogador";
+        Ranking ranking = new Ranking();
         try {
             pst = con.prepareStatement(sql);
-            pst.setInt(1, id);
-            pst.execute();
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+
+                Rank rank = new Rank();
+                rank.setId(rs.getInt(2));
+                rank.setTempo(rs.getLong(1));
+
+                Jogador jogador = new Jogador();
+                jogador.setId(rs.getInt(3));
+                jogador.setNome(rs.getString(4));
+                ranking.addJogador(new RankingJogadorDTO(rank,jogador));
+            }
             sucesso = true;
 
         } catch(SQLException ex) {
@@ -77,6 +95,6 @@ public class rankingDAO extends connectionDAO{
                 System.out.println("Erro: " + exc.getMessage());
             }
         }
-        return sucesso;
+        return ranking;
     }
 }
