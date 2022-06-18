@@ -1,6 +1,5 @@
 import br.inatel.cdg.Comojogar;
 import br.inatel.cdg.Conections.rankingDAO;
-import br.inatel.cdg.Entrada;
 import br.inatel.cdg.controller.Jogar;
 import br.inatel.cdg.models.Jogador;
 import br.inatel.cdg.models.MenuPrincipal;
@@ -19,7 +18,6 @@ public class Main {
 
 
         Scanner sc = new Scanner(System.in);
-        Entrada entrada = new Entrada();
         boolean flag = true;
         String jogarnovamente;
         Jogador jogador;
@@ -51,12 +49,8 @@ public class Main {
                     break;
                 case COMO_JOGAR:
                     Comojogar.Comojogartexto();
-                    try {
-                        TimeUnit.SECONDS.sleep(22);
-                        System.out.println(" PREPARADO? SE ESTIVER, DIGITE 1 PARA JOGAR ");
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    System.out.println("Para voltar para o menu principal, entre com qualquer caracter");
+                    sc.nextLine();
                     break;
                 case MOSTRAR_RANKING:
                     System.out.println("___________________________");
