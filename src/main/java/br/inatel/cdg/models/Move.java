@@ -17,6 +17,10 @@ public enum Move {
         this.label = label;
         this.validKeys = validKeys;
     }
+    public int getId(){
+        return id;
+    }
+
     static {
         for(Move move : Move.values()){
             for(Character validKey: move.validKeys)
@@ -24,15 +28,20 @@ public enum Move {
         }
     }
 
-    public static Move getUserInput(){
+    public static Move getUserInput(Move lastMove){
         Scanner input = new Scanner(System.in);
         while(true){
-            System.out.println("Do your next step!");
+            System.out.println("Dê o seu próximo passo!");
             Character key = input.next().charAt(0);
             Move move = Move.getMove(key);
-            if(move != null)
+            if(move == null){
+                System.out.println("Entrada inválida.");
+                continue;
+            }
+            if(lastMove == null || move.getId() != lastMove.getId())
                 return move;
-            System.out.println("Almost felt, keep calm.");
+            System.out.println("Quase caiu, Que isso meu filho, calma!.");
+            System.out.println("Lembre-se de usar o outro pé.");
         }
     }
 

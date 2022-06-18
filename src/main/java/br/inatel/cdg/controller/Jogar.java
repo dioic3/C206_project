@@ -47,22 +47,12 @@ public class Jogar {
             System.out.println(" VAI VAI VAI! ");
             // COMEÇA O JOGO
             tempoInicial = System.currentTimeMillis();
-
-            for(int passos =1;passos<11; passos++) {
-
-                passoatual = sc.nextLine();
-                while (!Move.isValid(passoatual)){
-                    System.out.println("INFORMAÇAO INVALIDA");
-                    passoatual = sc.nextLine();
-
-                }
-                if(!passoatual.equals(passoanterior)) {
-                    System.out.println("PASSOS DADOS " + passos);
-                    passoanterior = passoatual;
-                    continue;
-                }
-                System.out.println("Ops, quase tropecou");
-                System.out.println("LEMBRE-SE SEMPRE DE USAR O OUTRO PÉ");
+            Move move = null;
+            Move lastMove = null;
+            for(int passos =1;passos<=10; passos++) {
+                move = Move.getUserInput(lastMove);
+                System.out.println("Passo atual: " + passos);
+                lastMove = move;
             }
             System.out.println("FIM DA CORRIDA! ESTAMOS CALCULANDO SEU TEMPO...");
             TimeUnit.SECONDS.sleep(4);
