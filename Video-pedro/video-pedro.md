@@ -32,4 +32,6 @@ Classes como Ranking, Rank e RankingJogadorDTO são relacionadas a organização
 
 A classe Move está sendo usado para identificar se o jogador insere as informações corretas do pé esquerdo e direito na hora de jogar, evitando que o código seja quebrado durante a inserção de dados. Também ao inserir informações repetidas do pé esquerdo e direito a classe Move indica que o cara poderia tropeçar.
 
-A classe Menu Principal
+A classe Menu Principal foi criado com a finalidade de validar qual opção que o usuário quer, sendo exibido as informações de JOGAR, COMO JOGAR, MOSTRAR RANKING e SAIR. Tem-se uma função para pegar a opção que o usuário quer dentro das 4 opções disponiveis, depois tem uma função para imprimir as opções.
+
+As exceções servem para evitar que erros imprevistos aconteçam durante a execução do código e podem ser provenientes de erros. Para tratar essa exceções podemos realizar o tratamento dos locais no código que podem vir a lançar possíveis exceçõe, como por exemplo, campo de consulta a banco de dados, locais em que há divisões, consulta a arquivos de propriedades ou arquivos dentro do próprio computador. Além disso, podemos usar o comando try e catch para tratar as exceções em Java.
