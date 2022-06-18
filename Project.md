@@ -17,8 +17,11 @@ Foi feito um ranking para mostrar a quantidade de pessoas que jogou e o tempo to
 O menu do jogo é algo bem simples.
 
 **1**. Jogar
+
 **2**. Como jogar
+
 **3**. Mostrar Ranking
+
 **4**. Sair do Jogo.
 
 Como conclusão esse é o nosso projeto.
