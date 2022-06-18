@@ -2,7 +2,9 @@ package br.inatel.cdg.controller;
 
 import br.inatel.cdg.Conections.jogadorDAO;
 import br.inatel.cdg.models.Jogador;
+import br.inatel.cdg.models.Move;
 import br.inatel.cdg.models.Ranking;
+import br.inatel.cdg.Conections.rankingDAO;
 
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -17,17 +19,26 @@ public class Jogar {
         long tempoGasto;
 
         String passoanterior;
+        rankingDAO rankingBD = new rankingDAO();
         Ranking ranking = new Ranking();
+        ranking.addJogador(new Jogador("Jorge", 123123));
+        ranking.addJogador(new Jogador("Pedro", 1000));
+        ranking.addJogador(new Jogador("Joao", 12000));
+
         jogadorDAO jogadorBD = new jogadorDAO();
         String jogarnovamente;
 
 
         passoanterior = "x";
 
-        Jogador j1 = new Jogador();
         System.out.println("Digite seu nick: ");
-        j1.setNome(sc.nextLine());
-
+        String nome = sc.nextLine();
+        Jogador j1 =  jogadorBD.recuperaJogadorPeloNome(nome); // recupera jogador do BD
+        if(j1 == null){
+            j1 = new Jogador();
+            j1.setNome(nome);
+            jogadorBD.inserirJogador(j1);
+        }
         System.out.println("O jogo vai começar em ");
         try {
             TimeUnit.SECONDS.sleep(1);
@@ -42,10 +53,14 @@ public class Jogar {
             // COMEÇA O JOGO
             tempoInicial = System.currentTimeMillis();
 
+            for(int passos =1;passos<11; passos++) {
 
-
-            for(int passos =0;passos<10; passos++) {
                 passoatual = sc.nextLine();
+                while (!Move.isValid(passoatual)){
+                    System.out.println("INFORMAÇAO INVALIDA");
+                    passoatual = sc.nextLine();
+
+                }
                 if(!passoatual.equals(passoanterior)) {
                     System.out.println("PASSOS DADOS " + passos);
                     passoanterior = passoatual;
@@ -58,17 +73,20 @@ public class Jogar {
             TimeUnit.SECONDS.sleep(4);
             tempoFinal = System.currentTimeMillis();
             tempoGasto = tempoFinal - tempoInicial;
-            pos_jogo:
             System.out.println("Seu tempo foi: " + tempoGasto + "ms.");
             j1.setTempogasto(tempoGasto);
             ranking.addJogador(j1);
             System.out.println("Sua posiçao no ranking é: " + ranking.VerPosicao(j1));// implementaar retorno do rank
-            jogadorBD.inserirJogador(j1);
+            rankingBD.inserirRanking(j1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         System.out.println("JOGAR NOVAMENTE? SIM//NAO ");
         jogarnovamente = sc.nextLine();
+
+
     }
+
+
 
 }

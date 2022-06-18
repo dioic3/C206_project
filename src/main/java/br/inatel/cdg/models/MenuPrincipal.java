@@ -27,7 +27,7 @@ public enum MenuPrincipal {
     public static MenuPrincipal pegarUsuario(){
         Scanner input = new Scanner(System.in);
         while(true){
-            System.out.println("Seja bem-vindo ao Joguinho!");
+            System.out.println("Seja bem-vindo ao MARATRON 3000!");
             System.out.println("___________________________");
             MenuPrincipal.imprimirOpcoes();
             System.out.println("___________________________");

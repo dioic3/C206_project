@@ -52,4 +52,11 @@ public enum Move {
             return map.get(key);
         return null;
     }
+    public static boolean isValid(String key){
+        if(key.length() > 1 || key.length()==0){
+            return false;
+        }
+
+        return map.containsKey(key.charAt(0));
+    }
 }

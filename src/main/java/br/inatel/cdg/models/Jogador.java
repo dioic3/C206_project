@@ -1,10 +1,25 @@
 package br.inatel.cdg.models;
 
 public class Jogador implements Comparable<Jogador>{
-    private static String nick;
-    private static long tempogasto;
+    private int id;
+    private String nick;
+    private long tempogasto;
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Jogador() {
+    }
+
+    public Jogador(String nick, long tempogasto){
+        this.nick = nick;
+        this.tempogasto = tempogasto;
+    }
     public String getNome() {
         return nick;
     }
@@ -31,4 +46,5 @@ public class Jogador implements Comparable<Jogador>{
         }
         return 0;
     }
+
 }

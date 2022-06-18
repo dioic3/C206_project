@@ -15,6 +15,10 @@ public class Main {
         Ranking ranking = new Ranking(); // criar funçao para ler BD
         jogadorDAO jogadorBD = new jogadorDAO();
 
+        ranking.addJogador(new Jogador("Jorge", 123123));
+        ranking.addJogador(new Jogador("Pedro", 1000));
+        ranking.addJogador(new Jogador("Joao", 12000));
+
         Scanner sc = new Scanner(System.in);
         Entrada entrada = new Entrada();
         boolean flag = true;
