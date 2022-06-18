@@ -25,7 +25,7 @@ public class Main {
         long tempoFinal;
         long tempoGasto;
         int i = 0;
-        int NumPassos = 100;
+        int NumPassos = 10;
         Jogador jogadores[];
         int anterior;
 
@@ -38,7 +38,7 @@ public class Main {
         while (flag) {
             Ranking ranking = rankingBD.recuperaRankOrdenado();
             if (primeiravez) {
-                System.out.println("BEM VINDO");
+                System.out.println("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
             }
             primeiravez = false;
             MenuPrincipal menuPrincipal = MenuPrincipal.pegarUsuario();
@@ -55,6 +55,8 @@ public class Main {
                 case MOSTRAR_RANKING:
                     System.out.println("___________________________");
                     ranking.mostrarRank();
+                    System.out.println("___________________________");
+                    System.out.println("Para voltar para o menu principal, entre com qualquer caracter");
                     System.out.println("___________________________");
                     sc.nextLine();
                     break;
